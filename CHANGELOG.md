@@ -6,4 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.0.1]
 
-- Initial release
+- Initial release with features:
+  - Minify JSON
+  - Encode/Decode Base64
+  - Hashing (MD5, SHA-1, SHA-256)
+  - UUID Generation (v4)
