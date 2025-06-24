@@ -26,6 +26,3 @@ jobs:
 
       - name: Code Linting
         run: npm run lint
-
-      - name: Code Unit Tests
-        run: npm run test

@@ -59,7 +59,7 @@
     "package": "npm run lint && node esbuild.js --production",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "pretest": "npm run compile-tests && npm run compile",
     "lint": "npm run lint:ts && npm run lint:eslint && npm run lint:format",
     "lint:ts": "tsc --noEmit -p ./tsconfig.json",
     "lint:eslint": "eslint src",
