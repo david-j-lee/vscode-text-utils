@@ -53,6 +53,14 @@
         "title": "Text Utilities: Hash SHA-256"
       },
       {
+        "command": "vscode-text-utils.uri.selection.encode",
+        "title": "Text Utilities: URI Encode"
+      },
+      {
+        "command": "vscode-text-utils.uri.selection.decode",
+        "title": "Text Utilities: URI Decode"
+      },
+      {
         "command": "vscode-text-utils.uuid.cursor.v4",
         "title": "Text Utilities: UUID v4"
       }
