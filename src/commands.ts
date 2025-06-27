@@ -39,6 +39,8 @@ export function registerCommands(context: vscode.ExtensionContext) {
         const command = vscode.commands.registerCommand(
           commandKey,
           async () => {
+            console.debug(`Executing command: ${commandKey}`);
+
             await handlers[commandType](
               commandKey as string,
               commandHandler as any,
