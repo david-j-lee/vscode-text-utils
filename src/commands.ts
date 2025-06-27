@@ -1,70 +1,70 @@
-import { decodeBase64, encodeBase64 } from './features/base64';
-import { hashString } from './features/crypto';
-import { minifyJson } from './features/minify';
-import { getUuidV4 } from './features/uuid';
+import { base64 } from './features/base64';
+import { hash } from './features/hash';
+import { json } from './features/json';
+import { uri } from './features/uri';
+import { uuid } from './features/uuid';
+import { CursorCommand } from './types/CursorCommand';
+import { SelectionCommand } from './types/SelectionCommand';
 import * as vscode from 'vscode';
 
-interface Command {
-  command: string;
-  type: 'modify-selected-text' | 'insert-at-cursor';
-  handler: CommandHandler;
+const features = {
+  base64,
+  hash,
+  json,
+  uri,
+  uuid,
+};
+
+const handlers = {
+  selection: handleCommandOnSelection,
+  cursor: handleCommandOnCursor,
+};
+
+export function registerCommands(context: vscode.ExtensionContext) {
+  console.debug('Activating "vscode-text-utils" extension...');
+
+  for (const [featureKey, feature] of typedEntries(features)) {
+    console.debug(`Registering feature: ${featureKey}`);
+
+    for (const [commandType, commands] of typedEntries(feature)) {
+      console.debug(`Registering commands for type: ${commandType}`);
+
+      if (commands === undefined) {
+        continue;
+      }
+
+      for (const [commandName, commandHandler] of typedEntries(commands)) {
+        var commandKey = `vscode-text-utils.${featureKey}.${commandType}.${commandName}`;
+
+        const command = vscode.commands.registerCommand(
+          commandKey,
+          async () => {
+            console.debug(`Executing command: ${commandKey}`);
+
+            await handlers[commandType](
+              commandKey as string,
+              commandHandler as any,
+            );
+          },
+        );
+
+        context.subscriptions.push(command);
+
+        console.debug(`Registered command: ${commandKey}`);
+      }
+    }
+  }
+
+  console.debug('Activated "vscode-text-utils" extension.');
 }
 
-interface CommandHandler {
-  (selection?: string): string;
+function typedEntries<T>(obj: T): [keyof T, T[keyof T]][] {
+  return Object.entries(obj as object) as [keyof T, T[keyof T]][];
 }
 
-export const commandHandlers: Command[] = [
-  // Minify JSON
-  {
-    command: 'vscode-text-utils.minifyJsonSelection',
-    type: 'modify-selected-text',
-    handler: minifyJson,
-  },
-  // Base64 Encode/Decode
-  {
-    command: 'vscode-text-utils.encodeBase64Selection',
-    type: 'modify-selected-text',
-    handler: encodeBase64,
-  },
-  {
-    command: 'vscode-text-utils.decodeBase64Selection',
-    type: 'modify-selected-text',
-    handler: decodeBase64,
-  },
-  // Hashing
-  {
-    command: 'vscode-text-utils.hashMd5Selection',
-    type: 'modify-selected-text',
-    handler: (selection?: string) => {
-      return hashString(selection, 'md5');
-    },
-  },
-  {
-    command: 'vscode-text-utils.hashSha1Selection',
-    type: 'modify-selected-text',
-    handler: (selection?: string) => {
-      return hashString(selection, 'sha1');
-    },
-  },
-  {
-    command: 'vscode-text-utils.hashSha256Selection',
-    type: 'modify-selected-text',
-    handler: (selection?: string) => {
-      return hashString(selection, 'sha256');
-    },
-  },
-  // GUID Generation
-  {
-    command: 'vscode-text-utils.generateUuidV4',
-    type: 'insert-at-cursor',
-    handler: getUuidV4,
-  },
-];
-
-export async function handleCommandOnSelectedText(
+async function handleCommandOnSelection(
   commandKey: string,
-  handler: CommandHandler,
+  handler: SelectionCommand,
 ) {
   const editor = vscode.window.activeTextEditor;
 
@@ -102,9 +102,9 @@ export async function handleCommandOnSelectedText(
   }
 }
 
-export async function handleCommandInsertAtCursor(
+async function handleCommandOnCursor(
   commandKey: string,
-  handler: CommandHandler,
+  handler: CursorCommand,
 ) {
   const editor = vscode.window.activeTextEditor;
 
@@ -116,10 +116,8 @@ export async function handleCommandInsertAtCursor(
   const selections = editor.selections;
 
   for (const selection of selections) {
-    const selectedText = editor.document.getText(selection);
-
     try {
-      const modifiedText = handler(selectedText);
+      const modifiedText = handler();
 
       await editor.edit((editBuilder) => {
         editBuilder.insert(selection.start, modifiedText);

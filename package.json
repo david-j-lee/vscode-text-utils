@@ -1,8 +1,8 @@
 {
   "name": "vscode-text-utils",
-  "displayName": "VS Code Text Utils",
-  "description": "A Visual Studio Code extension for text utilities, including JSON minification.",
-  "version": "0.0.1",
+  "displayName": "Text Utilities",
+  "description": "Extension with various text utilities.",
+  "version": "0.1.0",
   "publisher": "david-j-lee",
   "icon": "./icon.png",
   "license": "MIT",
@@ -17,36 +17,52 @@
     "vscode": "^1.101.0"
   },
   "activationEvents": [],
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "vscode-text-utils.minifyJsonSelection",
-        "title": "Text Utils: Minify JSON Selection"
+        "command": "vscode-text-utils.base64.selection.encode",
+        "title": "Text Utilities: Base64 Encode"
       },
       {
-        "command": "vscode-text-utils.encodeBase64Selection",
-        "title": "Text Utils: Encode Base64 Selection"
+        "command": "vscode-text-utils.base64.selection.decode",
+        "title": "Text Utilities: Base64 Decode"
       },
       {
-        "command": "vscode-text-utils.decodeBase64Selection",
-        "title": "Text Utils: Decode Base64 Selection"
+        "command": "vscode-text-utils.json.selection.minify",
+        "title": "Text Utilities: JSON Minify"
       },
       {
-        "command": "vscode-text-utils.hashMd5Selection",
-        "title": "Text Utils: Hash MD5 Selection"
+        "command": "vscode-text-utils.json.selection.escape",
+        "title": "Text Utilities: JSON Escape"
       },
       {
-        "command": "vscode-text-utils.hashSha1Selection",
-        "title": "Text Utils: Hash SHA-1 Selection"
+        "command": "vscode-text-utils.json.selection.unescape",
+        "title": "Text Utilities: JSON Unescape"
       },
       {
-        "command": "vscode-text-utils.hashSha256Selection",
-        "title": "Text Utils: Hash SHA-256 Selection"
+        "command": "vscode-text-utils.hash.selection.md5",
+        "title": "Text Utilities: Hash MD5"
       },
       {
-        "command": "vscode-text-utils.generateUuidV4",
-        "title": "Text Utils: Generate UUID v4"
+        "command": "vscode-text-utils.hash.selection.sha1",
+        "title": "Text Utilities: Hash SHA-1"
+      },
+      {
+        "command": "vscode-text-utils.hash.selection.sha256",
+        "title": "Text Utilities: Hash SHA-256"
+      },
+      {
+        "command": "vscode-text-utils.uri.selection.encode",
+        "title": "Text Utilities: URI Encode"
+      },
+      {
+        "command": "vscode-text-utils.uri.selection.decode",
+        "title": "Text Utilities: URI Decode"
+      },
+      {
+        "command": "vscode-text-utils.uuid.cursor.v4",
+        "title": "Text Utilities: UUID v4"
       }
     ]
   },
