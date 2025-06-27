@@ -6,7 +6,7 @@ export const json: Feature = {
       return JSON.stringify(JSON.parse(selection));
     },
     escape(selection) {
-      return JSON.stringify(JSON.stringify(selection));
+      return JSON.stringify(selection);
     },
     unescape(selection) {
       return JSON.parse(selection);
