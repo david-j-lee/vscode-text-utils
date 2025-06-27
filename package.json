@@ -2,7 +2,7 @@
   "name": "vscode-text-utils",
   "displayName": "Text Utilities",
   "description": "Extension with various text utilities.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "david-j-lee",
   "icon": "./icon.png",
   "license": "MIT",
