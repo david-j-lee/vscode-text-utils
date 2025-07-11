@@ -2,7 +2,7 @@
   "name": "vscode-text-utils",
   "displayName": "Text Utilities",
   "description": "Extension with various text utilities.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "david-j-lee",
   "icon": "./icon.png",
   "license": "MIT",
@@ -27,6 +27,22 @@
       {
         "command": "vscode-text-utils.base64.selection.decode",
         "title": "Text Utilities: Base64 Decode"
+      },
+      {
+        "command": "vscode-text-utils.date.cursor.nowIso8601",
+        "title": "Text Utilities: Now ISO601"
+      },
+      {
+        "command": "vscode-text-utils.date.cursor.nowLocale",
+        "title": "Text Utilities: Now Locale"
+      },
+      {
+        "command": "vscode-text-utils.date.cursor.nowLocaleDate",
+        "title": "Text Utilities: Now Locale Date"
+      },
+      {
+        "command": "vscode-text-utils.date.cursor.nowLocaleTime",
+        "title": "Text Utilities: Now Locale Time"
       },
       {
         "command": "vscode-text-utils.json.selection.minify",

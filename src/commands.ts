@@ -1,4 +1,5 @@
 import { base64 } from './features/base64';
+import { date } from './features/date';
 import { hash } from './features/hash';
 import { json } from './features/json';
 import { uri } from './features/uri';
@@ -9,6 +10,7 @@ import * as vscode from 'vscode';
 
 const features = {
   base64,
+  date,
   hash,
   json,
   uri,

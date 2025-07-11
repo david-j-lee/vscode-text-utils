@@ -6,6 +6,11 @@ This is a Visual Studio Code extension that provides utilities for text manipula
 
 - **Base64**
   - Encode/Decode
+- **Date**
+  - Now ISO 8601
+  - Now Local
+  - Now Local Date
+  - Now Local Time
 - **JSON**
   - Minify
   - Encode/Decode
